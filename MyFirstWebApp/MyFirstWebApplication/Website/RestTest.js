@@ -17,7 +17,6 @@ function incrementNumber() {
         });
 }
 
-// Funktion zum Berechnen der Summe von zwei Zahlen
 function calculateSum() {
     const zahlA = parseInt(document.getElementById('zahlA').value);
     const zahlB = parseInt(document.getElementById('zahlB').value);
