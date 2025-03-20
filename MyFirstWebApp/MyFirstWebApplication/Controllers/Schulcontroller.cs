@@ -8,7 +8,7 @@ namespace MyFirstWebApplication.Controllers
     public class Schulcontroller : ControllerBase
     {
         private static Schule schule = new Schule();
-        [HttpGet("Alle Schüler")]
+        [HttpGet("AlleSchueler")]
         public ActionResult<int> AllStudents()
         {
             return Ok(schule.SchuelerList);
