@@ -30,3 +30,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.IncludeFields = true;
+});
