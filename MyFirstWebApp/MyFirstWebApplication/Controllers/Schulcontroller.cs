@@ -9,7 +9,7 @@ namespace MyFirstWebApplication.Controllers
     {
         private static Schule schule = new Schule();
         [HttpGet("AlleSchueler")]
-        public ActionResult<int> AllStudents()
+        public ActionResult<List<Schueler>> AllStudents()
         {
             return Ok(schule.SchuelerList);
         }
@@ -26,7 +26,7 @@ namespace MyFirstWebApplication.Controllers
         {
             return Ok(new { Durchschnittsalter = schule.DurchschnittsalterSchueler() });
         }
-
+        
         [HttpGet("Geschlecht")]
         public IActionResult Geschlechter()
         {

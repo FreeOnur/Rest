@@ -64,7 +64,7 @@ namespace MyFirstWebApplication.Objects
                 if (schueler.Klasse == klasse)
                 {
                     anzahlSchueler++;
-                    if (schueler.Geschlecht == "Weiblich")
+                    if (schueler.Geschlecht == "weiblich")
                     {
                         anzahlFrauen++;
                     }
