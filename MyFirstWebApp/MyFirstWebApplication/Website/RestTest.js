@@ -1,7 +1,7 @@
 function incrementNumber() {
     const number = parseInt(document.getElementById('incrementNumber').value);
 
-    fetch('https://localhost:7058/numbers/increment', {
+    fetch('http://localhost:5145/numbers/increment', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ function calculateSum() {
         ZahlB: zahlB
     };
 
-    fetch('https://localhost:7058/numbers/Sum', {
+    fetch('http://localhost:5145/numbers/Sum', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -39,5 +39,88 @@ function calculateSum() {
         })
         .catch(error => {
             console.error('Fehler beim Berechnen der Summe:', error);
+        });
+}
+
+function addStudent() {
+    const date = document.getElementById('birthdate').value;
+    const gender = document.getElementById('gender').value;
+    const klasse = document.getElementById('class').value;
+
+    const student = {
+        geschlecht: gender,
+        geburtstag: date,
+        klasse: klasse
+    };
+
+    fetch('http://localhost:5145/Schul/AddSchueler', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(student)
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('responseAdded').textContent = `Schüler hinzugefügt: ${JSON.stringify(data)}`;
+        })
+        .catch(error => {
+            console.error('Fehler beim Hinzufügen:', error);
+        });
+}
+
+function studentAll() {
+    fetch('http://localhost:5145/Schul/AlleSchueler', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            let html = '';
+            console.log(data);
+            data.forEach(element => {
+                html += `<div class="student"> <br/>Geschlecht: ${element.geschlecht} <br/>Geburtstag: ${element.geburtstag}<br/>Klasse: ${element.klasse} <br/>Alter: ${element.alter} </div>`;
+            });
+
+            document.getElementById('content').innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Fehler beim Abrufen:', error);
+        });
+}
+
+
+
+function studentAge() {
+    fetch('http://localhost:5145/Schul/Durchschnittsalter', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById('responseAge').textContent = `Durchschnittsalter: ${data.durchschnittsalter}`;
+        })
+        .catch(error => {
+            console.error('Fehler beim Abrufen des Durchschnittsalters:', error);
+        });
+}
+function studentGender() {
+    fetch('http://localhost:5145/Schul/Geschlecht', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('responseGender').textContent = `Geschlechter: ${data}`;
+        })
+        .catch(error => {
+            console.error('Fehler beim aufrufen:', error);
         });
 }
